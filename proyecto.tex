@@ -14,56 +14,105 @@
 \begin{document}
 
 \title{
-{\large \textsc{Escuela Superior Politécnica del Litoral} \\}
+{\large \textsc{Escuela Superior Politécnica del Litoral}\\
+Administración de Sistemas Operativos - CCPG1031: Proyecto Final 
+}\\
 Implementación de Servicio de
 Telefonía IP (VoIP)\\
-{\normalsize Administración de Sistemas Operativos - CCPG1031: Proyecto Final 
-}}
+}
 
-\author{\IEEEauthorblockN{1\textbf{Lino Ontano}}
+\author{\IEEEauthorblockN{\textbf{Lino Ontano}}
 \IEEEauthorblockA{	\textit{Telemática}
 \\Guayaquil - Ecuador \\
 lontano@espol.edu.ec
 }
 \and
-\IEEEauthorblockN{2\textbf{Lino Ontano}}
+\IEEEauthorblockN{\textbf{Flavio Murillo}}
 \IEEEauthorblockA{	\textit{Telemática}
 \\Guayaquil - Ecuador \\
-lontano@espol.edu.ec
+famurill@espol.edu.ec
 }
 \and
-\IEEEauthorblockN{2\textbf{Lino Ontano}}
+\IEEEauthorblockN{\textbf{Jonathan Yagual}}
 \IEEEauthorblockA{	\textit{Telemática}
 \\Guayaquil - Ecuador \\
-lontano@espol.edu.ec
+jonosyag@espol.edu.ec
 }
 }
 
 
 \maketitle
 \begin{abstract}
-	Esta investigación, permitirá conocer más a fondo las plataformas de ``Prototyping" Raspberry Pi 3, Arduino uno R3, Beaglebone black y pcDuino.
+	Este proyecto permitirá aprender las bases necesarias para la elaboración de una central telefónica (PBX) con software gratuito.
 \end{abstract}
 
 \begin{IEEEkeywords}
-	component, formatting, style, styling, insert
+	PBX
 \end{IEEEkeywords}
 \section{Introducción}\label{sec:int}
-El internet de las cosas (IoT) se está desarrollando a un ritmo rápido, gracias en parte a una explosión en la disponibilidad de hardware de computación pequeño y barato. Los kits de creación de prototipos IoT y las placas de desarrollo combinan microcontroladores y procesadores con chips inalámbricos y otros componentes en un paquete preconfigurado, listo para el programa.
-
-Todos estos dispositivos conforman parte de las nuevas plataformas de prototipado que se utilizan hoy en día. Dado a su tamaño y precio, resulta muy cómodo su utilización actualmente, y de suma importancia saber cómo funcionan.
+Se ha oído hablar mucho de VoIP, con aplicaciones tan extendidas como Skype. Sin embargo,
+la propuesta en este proyecto es ir algo más allá y poner en funcionamiento nuestra propia
+centralita telefónica PBX basada en VoIP. Montar una centralita telefónica propia implica
+un ahorro de dinero en la compra de una centralita convencional o de VoIP, para ello se utlizará Asterisk, software distribuido bajo licencia GNU. Entre
+las funcionalidades de Asterisk, es posible montar, incluso, sistemas de atención automática,contestador e integrar la telefonía IP en nuestra sitio web.
+En el presente proyecto instalaremos un servidor PBX Asterisk paso a paso, configuración de su GUI FreePBX y conectaremos clientes SoftPhones para simular la funcionalidad de nuestra central telefónica.
 
 
 \section{Antecedentes}\label{sec:ant}
-\begin{enumerate}
-\item\textbf{ Prototipo:} es un modelo (representación, demostración o simulación) fácilmente ampliable y modificable de un sistema planificado, probablemente incluyendo su interfaz y su funcionalidad de entradas y salidas.
-\item \textbf{Microcontrolador:} es un circuito integrado programable, capaz de ejecutar las órdenes grabadas en su memoria.
-\item \textbf{SBC:} una placa computadora u ordenador de placa reducida (en inglés: Single Board Computer) es una computadora completa en un sólo circuito. El diseño se centra en un sólo microprocesador con la RAM, I/O y todas las demás características de un computador funcional en una sola tarjeta que suele ser de tamaño reducido.
-\item \textbf{Microprocesador:} es el circuito integrado central más complejo de un sistema informático, encargado de ejecutar los programas, desde el sistema operativo hasta las aplicaciones de usuario.
-\end{enumerate}
+\subsection{\textbf{ VoIP:}} 
+\textbf{Voz sobre protocolo de Internet} es un conjunto de recursos que hacen posible que la señal de voz viaje a través de Internet empleando el protocolo IP, es decir la señal se envía en forma digital, en paquetes de datos. Los protocolos de internet que se usan para enviar las señales de voz sobre la red IP se conocen como protocolos de voz sobre IP o protocolos IP. 
+Es muy importante diferenciar entre voz sobre IP (VoIP) y telefonía sobre IP.
+\begin{itemize}
+\item VoIP es el conjunto de normas, dispositivos, protocolos ―en definitiva, la tecnología― que permite transmitir voz sobre el protocolo IP.
+\item La telefonía sobre IP es el servicio telefónico disponible al público, por tanto con numeración E.164, realizado con tecnología de VoIP.\footnote{Tampoco se debe confundir «telefonía sobre IP» con ToIP (text over IP: ‘texto sobre IP’).}
+\end{itemize}
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.3\textwidth]{img/voip01.jpg}}
+	\caption{Componentes de una central telefónica VoIP}
+	\label{fig:ant01}
+\end{figure}
+Los elementos que forman parte de un servicio VoIP son los siguientes:
+\begin{itemize}
+\item \textbf{Cliente}: es el que establece las llamadas de voz, se recibe a través del micrófono del usuario (entrada de información) se codifica, se empaqueta y, de la misma forma, esta información se decodifica y reproduce (salida de la información).\\
+Un cliente puede ser un usuario de Skype o un usuario de alguna empresa que venda sus servicios de telefonía sobre IP o teléfonos IP o \textit{Softphones} que es un software que permite realizar llamadas a través de una computadora conectada a internet.
 
-\section{Plataformas de ``Prototyping"}\label{sec:esc}
-Se investigó las siguientes plataformas de ``Prototyping" donde se analizó su precio en el mercado, sistemas operativos que utilizan y demás características que nos permita adentrarnos en este mundo del prototipado por medio de SBC.
+\item \textbf{Servidores}: son los que se encargan de manejar operaciones de base de datos, realizado en un tiempo real como en uno fuera de él. Entre estas operaciones se tienen la contabilidad, la recolección, el enrutamiento, la administración y control del servicio, el registro de los usuarios.\\
+Usualmente en los servidores se instala software denominados Switches o IP-PBX (conmutadores IP), ejemplos de switches pueden ser "Voipswitch", "Mera", "Nextone" entre otros, y de IP-PBX pueden ser los de Alcatel-Lucent, Cisco o Avaya en marcas comerciales y Asterisk de código abierto. Para el presente proyecto se utilizará Asterisk.
+\item \textbf{Gateways}: brindan un puente de comunicación entre todos los usuarios, su función principal es la de proveer interfaces con la telefonía tradicional adecuada, la cual funcionará como una plataforma para los usuarios (clientes) virtuales. Los gateways se utilizan para terminar la llamada, es decir: el cliente origina la llamada y el gateway termina la llamada, eso es cuando un cliente llama a un teléfono fijo o celular, debe existir la parte que hace posible que esa llamada que viene por internet logre conectarse con un cliente de una empresa telefónica fija o celular.
+\end{itemize}
+\subsection{\textbf{ IP-PBX:}}  
+Un conmutador IP o PBX por sus siglas en inglés de “Private Branch eXchange”, es la evolución de los viejos conmutadores basados en TDM; una red telefónica privada que es utilizada dentro de una empresa. En la actualidad, la era de las Comunicaciones Unificadas, los conmutadores IP ya no son simples plataformas de voz como lo eran antes. Un línea muy delgada separa las Comunicaciones Unificadas y la Telefonía IP.\\
+Un Conmutador IP o PBX IP conecta las extensiones internas dentro de una empresa y al mismo tiempo las conecta con la red pública conmutada, conocida también como PSTN (Public Switched Telephone Network), Proveedores VoIP y Troncales SIP, como se observa en la figura \ref{fig:ant01}.
+\subsection{\textbf{ Asterisk:}}
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.2\textwidth]{img/asterisk01.png}}
+	\caption{Logo de Asterisk}
+	\label{fig:ant02}
+\end{figure}
+\textit{Asterisk} es un programa de software libre (bajo licencia GPL) que proporciona funcionalidades de una central telefónica (PBX). Como cualquier PBX, se puede conectar un número determinado de teléfonos para hacer llamadas entre sí dentro de una misma organización e incluso acceder a comunicaciones fuera de la misma a la PSTN o conectando a un proveedor de VoIP o bien a una RDSI tanto básicos como primarios. Originalmente desarrollado para el sistema operativo GNU/Linux, \textit{Asterisk} actualmente también se distribuye en versiones para los sistemas operativos BSD, Mac OS X, Solaris y Microsoft Windows, aunque la plataforma nativa (GNU/Linux) es la que cuenta con mejor soporte de todas.\\
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.5\textwidth]{img/asteriksvoip00.png}}
+	\caption{Arquitectura de una red con \textit{Asterisk}}
+	\label{fig:ant03}
+\end{figure}
+\textit{Asterisk} incluye muchas características que anteriormente sólo estaban disponibles en costosos sistemas propietarios PBX, como buzón de voz, conferencias, IVR, distribución automática de llamadas, y otras muchas. Los usuarios pueden crear nuevas funcionalidades escribiendo un dialplan en el lenguaje de script de \textit{Asterisk} o añadiendo módulos escritos en lenguaje C o en cualquier otro lenguaje de programación soportado en GNU/Linux.\\
+Uno de los puntos fuertes del software \textit{Asterisk} es que permite la unificación de tecnologías: VoIP, GSM y PSTN.\\
+\textit{Asterisk} se empieza a adoptar en algunos entornos corporativos como una gran solución de bajo coste junto con SER (Sip Express Router).
+
+
+\subsection{\textbf{ FreePBX:}}  
+\textit{FreePBX} es una GUI (interfaz gráfica de usuario) de código abierto basado en web que controla y dirige \textit{Asterisk}. \textit{FreePBX} está licenciado bajo la GNU General Public License y es un componente del FreePBX Distro (una distribución de GNU/Linux, basada en CentOS con el sistema PBX pre-instalado).
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.25\textwidth]{img/freepbx01.png}}
+	\caption{Logo de FreePBX Distro}
+	\label{fig:ant04}
+\end{figure}
+
+
+\section{Desarrollo del concepto}\label{sec:ddc}
+Para el desarrollo de nuestro proyecto, lo haremos de manera local por medio de una máquina virtual que hará de servidor
+
+\section{Putamadre}
 \subsection{Raspberry Pi 3}
 Es el modelo más antiguo de la tercera generación de Raspberry Pi. Reemplazó el Raspberry Pi 2 Model B en febrero de 2016. Desarrollado en el Reino Unido por la fundación \textbf{Raspberry Pi}, con el objetivo de estimular la enseñanza de informática en las escuelas. \\
 Salió a la luz en el año 2016, renueva procesador, una vez más de la compañía Broadcom, una vez más un Quad-Core, pero pasa de 900 MHz a 1.20 GHz. Mantiene la RAM de 1GB. Su novedad fue la inclusión de Wi-Fi y Bluetooth (4.1 Low Energy) sin necesidad de adaptadores.
