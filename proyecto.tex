@@ -42,6 +42,7 @@ jonosyag@espol.edu.ec
 
 
 \maketitle
+
 \begin{abstract}
 	Este proyecto permitirá aprender las bases necesarias para la elaboración de una central telefónica (PBX) con software gratuito.
 \end{abstract}
@@ -69,7 +70,7 @@ Es muy importante diferenciar entre voz sobre IP (VoIP) y telefonía sobre IP.
 \begin{figure}[h]
 	\centerline{\includegraphics[width=0.3\textwidth]{img/voip01.jpg}}
 	\caption{Componentes de una central telefónica VoIP}
-	\label{fig:ant01}
+	\label{fig:ant00}
 \end{figure}
 Los elementos que forman parte de un servicio VoIP son los siguientes:
 \begin{itemize}
@@ -77,12 +78,12 @@ Los elementos que forman parte de un servicio VoIP son los siguientes:
 Un cliente puede ser un usuario de Skype o un usuario de alguna empresa que venda sus servicios de telefonía sobre IP o teléfonos IP o \textit{Softphones} que es un software que permite realizar llamadas a través de una computadora conectada a internet.
 
 \item \textbf{Servidores}: son los que se encargan de manejar operaciones de base de datos, realizado en un tiempo real como en uno fuera de él. Entre estas operaciones se tienen la contabilidad, la recolección, el enrutamiento, la administración y control del servicio, el registro de los usuarios.\\
-Usualmente en los servidores se instala software denominados Switches o IP-PBX (conmutadores IP), ejemplos de switches pueden ser "Voipswitch", "Mera", "Nextone" entre otros, y de IP-PBX pueden ser los de Alcatel-Lucent, Cisco o Avaya en marcas comerciales y Asterisk de código abierto. Para el presente proyecto se utilizará Asterisk.
+Usualmente en los servidores se instala software denominados Switches o IP-PBX (conmutadores IP), ejemplos de switches pueden ser "Voipswitch", "Mera", "Nextone", entre otros, y de IP-PBX pueden ser los de Alcatel-Lucent, Cisco o Avaya en marcas comerciales y Asterisk de código abierto. Para el presente proyecto se utilizará Asterisk.
 \item \textbf{Gateways}: brindan un puente de comunicación entre todos los usuarios, su función principal es la de proveer interfaces con la telefonía tradicional adecuada, la cual funcionará como una plataforma para los usuarios (clientes) virtuales. Los gateways se utilizan para terminar la llamada, es decir: el cliente origina la llamada y el gateway termina la llamada, eso es cuando un cliente llama a un teléfono fijo o celular, debe existir la parte que hace posible que esa llamada que viene por internet logre conectarse con un cliente de una empresa telefónica fija o celular.
 \end{itemize}
 \subsection{\textbf{ IP-PBX:}}  
 Un conmutador IP o PBX por sus siglas en inglés de “Private Branch eXchange”, es la evolución de los viejos conmutadores basados en TDM; una red telefónica privada que es utilizada dentro de una empresa. En la actualidad, la era de las Comunicaciones Unificadas, los conmutadores IP ya no son simples plataformas de voz como lo eran antes. Un línea muy delgada separa las Comunicaciones Unificadas y la Telefonía IP.\\
-Un Conmutador IP o PBX IP conecta las extensiones internas dentro de una empresa y al mismo tiempo las conecta con la red pública conmutada, conocida también como PSTN (Public Switched Telephone Network), Proveedores VoIP y Troncales SIP, como se observa en la figura \ref{fig:ant01}.
+Un Conmutador IP o PBX IP conecta las extensiones internas dentro de una empresa y al mismo tiempo las conecta con la red pública conmutada, conocida también como PSTN (Public Switched Telephone Network), Proveedores VoIP y Troncales SIP, como se observa en la figura \ref{fig:ant00}.
 \subsection{\textbf{ Asterisk:}}
 \begin{figure}[h]
 	\centerline{\includegraphics[width=0.2\textwidth]{img/asterisk01.png}}
@@ -110,7 +111,13 @@ Uno de los puntos fuertes del software \textit{Asterisk} es que permite la unifi
 
 
 \section{Desarrollo del concepto}\label{sec:ddc}
-Para el desarrollo de nuestro proyecto, lo haremos de manera local por medio de una máquina virtual que hará de servidor
+\begin{figure}[h]
+	\centerline{\includegraphics[width=0.3\textwidth]{img/diagrama01.png}}
+	\caption{Diagrama a implementar con FreePBX como servidor y dos clientes}
+	\label{fig:ddc01}
+\end{figure}
+
+Para el desarrollo de nuestro proyecto, lo haremos de manera local por medio de una máquina virtual que hará de servidor y en cual se conectará dos clientes, un dispositivo móvil y una laptop, donde la laptop hará de cliente y de administrador ya que tendrá acceso a la interfaz gráfica de FreePBX para su administración. En los clientes los dispositivos harán de \textit{softphones}, con diferentes software para cada uno en el cual no entraremos en detalle dado que nos interesa la administración del servidor de nuestra central telefónica que le brindará servicio a esos dos clientes.
 
 \section{Putamadre}
 \subsection{Raspberry Pi 3}

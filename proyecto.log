@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.1)  25 JAN 2019 06:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.1)  25 JAN 2019 07:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -750,9 +750,6 @@ LaTeX Warning: Label `fig:ant01' multiply defined.
 
 LaTeX Warning: Label `fig:ant01' multiply defined.
 
-
-LaTeX Warning: Label `fig:ant01' multiply defined.
-
 )
 \openout1 = `proyecto.aux'.
 
@@ -847,17 +844,17 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for U+msa on input line 67.
+LaTeX Font Info:    Try loading font information for U+msa on input line 68.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 67.
+LaTeX Font Info:    Try loading font information for U+msb on input line 68.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 67.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 68.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
@@ -865,7 +862,7 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 <img/voip01.jpg, id=1, 523.9575pt x 435.6275pt>
 File: img/voip01.jpg Graphic file (type jpg)
 <use img/voip01.jpg>
-Package pdftex.def Info: img/voip01.jpg  used on input line 70.
+Package pdftex.def Info: img/voip01.jpg  used on input line 71.
 (pdftex.def)             Requested size: 154.80157pt x 128.70177pt.
 
 
@@ -881,12 +878,12 @@ Underfull \vbox (badness 5939) has occurred while \output is active []
 <img/asterisk01.png, id=12, 1204.5pt x 710.655pt>
 File: img/asterisk01.png Graphic file (type png)
 <use img/asterisk01.png>
-Package pdftex.def Info: img/asterisk01.png  used on input line 88.
+Package pdftex.def Info: img/asterisk01.png  used on input line 89.
 (pdftex.def)             Requested size: 103.19843pt x 60.87657pt.
 <img/asteriksvoip00.png, id=14, 482.80376pt x 309.155pt>
 File: img/asteriksvoip00.png Graphic file (type png)
 <use img/asteriksvoip00.png>
-Package pdftex.def Info: img/asteriksvoip00.png  used on input line 94.
+Package pdftex.def Info: img/asteriksvoip00.png  used on input line 95.
 (pdftex.def)             Requested size: 258.0pt x 165.20995pt.
 
 
@@ -895,51 +892,48 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <img/freepbx01.png, id=15, 505.89pt x 186.6975pt>
 File: img/freepbx01.png Graphic file (type png)
 <use img/freepbx01.png>
-Package pdftex.def Info: img/freepbx01.png  used on input line 106.
+Package pdftex.def Info: img/freepbx01.png  used on input line 107.
 (pdftex.def)             Requested size: 129.0pt x 47.6058pt.
-
-Underfull \hbox (badness 6348) in paragraph at lines 134--134
+<img/diagrama01.png, id=16, 339.2675pt x 234.8775pt>
+File: img/diagrama01.png Graphic file (type png)
+<use img/diagrama01.png>
+Package pdftex.def Info: img/diagrama01.png  used on input line 115.
+(pdftex.def)             Requested size: 154.80157pt x 107.17047pt.
+[2 <./img/asterisk01.png> <./img/asteriksvoip00.png> <./img/freepbx01.png> <./i
+mg/diagrama01.png>]
+Underfull \hbox (badness 6348) in paragraph at lines 141--141
 []\OT1/ptm/m/n/8 Almacenamiento in-
  []
 
 
-Underfull \hbox (badness 1558) in paragraph at lines 135--135
+Underfull \hbox (badness 1558) in paragraph at lines 142--142
 []\OT1/ptm/m/n/8 10/100 Et-her-net RJ-45 v[]^^Pa hub USB, Wi-fi
  []
 
 
-Underfull \hbox (badness 1552) in paragraph at lines 136--136
+Underfull \hbox (badness 1552) in paragraph at lines 143--143
 []\OT1/ptm/m/n/8 Fuente de ali-men-ta-
  []
 
 
-Underfull \hbox (badness 7851) in paragraph at lines 137--137
+Underfull \hbox (badness 7851) in paragraph at lines 144--144
 []\OT1/ptm/m/n/8 Sistemas Ope-ra-ti-vos
  []
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[2 <./img/asterisk01.png> <./img/asteriksvoip00.png> <./img/freepbx01.png>]
-Underfull \hbox (badness 7851) in paragraph at lines 166--166
+Underfull \hbox (badness 7851) in paragraph at lines 173--173
 []\OT1/ptm/m/n/8 Sistemas Ope-ra-ti-vos
  []
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \hbox (badness 7851) in paragraph at lines 185--185
+Underfull \hbox (badness 7851) in paragraph at lines 192--192
 []\OT1/ptm/m/n/8 Sistemas Ope-ra-ti-vos
  []
 
 
-Underfull \hbox (badness 7851) in paragraph at lines 214--214
+Underfull \hbox (badness 7851) in paragraph at lines 221--221
 []\OT1/ptm/m/n/8 Sistemas Ope-ra-ti-vos
  []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
 
 [3]
 
@@ -953,9 +947,7 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[4
-
-] (./proyecto.aux
+[4] (./proyecto.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 )
@@ -964,10 +956,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5653 strings out of 492982
- 78492 string characters out of 6134896
- 165656 words of memory out of 5000000
- 9104 multiletter control sequences out of 15000+600000
+ 5659 strings out of 492982
+ 78610 string characters out of 6134896
+ 166672 words of memory out of 5000000
+ 9109 multiletter control sequences out of 15000+600000
  49576 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,12n,35p,744b,359s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -977,10 +969,10 @@ e/texmf-dist/fonts/type1/public/amsfonts/latxfont/lasy8.pfb></usr/share/texlive
 ts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/t
 imes/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pf
 b>
-Output written on proyecto.pdf (4 pages, 282320 bytes).
+Output written on proyecto.pdf (4 pages, 291645 bytes).
 PDF statistics:
- 46 PDF objects out of 1000 (max. 8388607)
+ 48 PDF objects out of 1000 (max. 8388607)
  27 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
