@@ -9,13 +9,17 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{subcaption}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
 \title{
 {\large \textsc{Escuela Superior Politécnica del Litoral}\\
-Administración de Sistemas Operativos - CCPG1031: Proyecto Final 
+Administración de Sistemas Operativos - CCPG1031: Proyecto Final
 }\\
 Implementación de Servicio de
 Telefonía IP (VoIP)\\
@@ -58,10 +62,23 @@ un ahorro de dinero en la compra de una centralita convencional o de VoIP, para 
 las funcionalidades de Asterisk, es posible montar, incluso, sistemas de atención automática,contestador e integrar la telefonía IP en nuestra sitio web.
 En el presente proyecto instalaremos un servidor PBX Asterisk paso a paso, configuración de su GUI FreePBX y conectaremos clientes SoftPhones para simular la funcionalidad de nuestra central telefónica.
 
+\section{Objetivos}
+\subsection{General}
+\begin{itemize}
+\item Montar una centralita telefónica utilizando software \textit{open source} simulando la conexión cliente servidor con otros dispositivos.
+\end{itemize}
 
-\section{Antecedentes}\label{sec:ant}
-\subsection{\textbf{ VoIP:}} 
-\textbf{Voz sobre protocolo de Internet} es un conjunto de recursos que hacen posible que la señal de voz viaje a través de Internet empleando el protocolo IP, es decir la señal se envía en forma digital, en paquetes de datos. Los protocolos de internet que se usan para enviar las señales de voz sobre la red IP se conocen como protocolos de voz sobre IP o protocolos IP. 
+\subsection{Específicos}
+\begin{itemize}
+\item Configurar el servidor FreePBX en una máquina virtual que permitirá elaborar la arquitectura de nuestra centralita telefónica.
+\item Crear las extensiones en el servidor para conectar clientes a nuestro servidor.
+\item Realizar la conexión entre clientes utilizando \textit{Softphones} de distintas plataformas.
+\end{itemize}
+
+
+\section{Marco Teórico}\label{sec:ant}
+\subsection{\textbf{ VoIP:}}
+\textbf{Voz sobre protocolo de Internet} es un conjunto de recursos que hacen posible que la señal de voz viaje a través de Internet empleando el protocolo IP, es decir la señal se envía en forma digital, en paquetes de datos. Los protocolos de internet que se usan para enviar las señales de voz sobre la red IP se conocen como protocolos de voz sobre IP o protocolos IP.
 Es muy importante diferenciar entre voz sobre IP (VoIP) y telefonía sobre IP.
 \begin{itemize}
 \item VoIP es el conjunto de normas, dispositivos, protocolos ―en definitiva, la tecnología― que permite transmitir voz sobre el protocolo IP.
@@ -81,7 +98,7 @@ Un cliente puede ser un usuario de Skype o un usuario de alguna empresa que vend
 Usualmente en los servidores se instala software denominados Switches o IP-PBX (conmutadores IP), ejemplos de switches pueden ser "Voipswitch", "Mera", "Nextone", entre otros, y de IP-PBX pueden ser los de Alcatel-Lucent, Cisco o Avaya en marcas comerciales y Asterisk de código abierto. Para el presente proyecto se utilizará Asterisk.
 \item \textbf{Gateways}: brindan un puente de comunicación entre todos los usuarios, su función principal es la de proveer interfaces con la telefonía tradicional adecuada, la cual funcionará como una plataforma para los usuarios (clientes) virtuales. Los gateways se utilizan para terminar la llamada, es decir: el cliente origina la llamada y el gateway termina la llamada, eso es cuando un cliente llama a un teléfono fijo o celular, debe existir la parte que hace posible que esa llamada que viene por internet logre conectarse con un cliente de una empresa telefónica fija o celular.
 \end{itemize}
-\subsection{\textbf{ IP-PBX:}}  
+\subsection{\textbf{ IP-PBX:}}
 Un conmutador IP o PBX por sus siglas en inglés de “Private Branch eXchange”, es la evolución de los viejos conmutadores basados en TDM; una red telefónica privada que es utilizada dentro de una empresa. En la actualidad, la era de las Comunicaciones Unificadas, los conmutadores IP ya no son simples plataformas de voz como lo eran antes. Un línea muy delgada separa las Comunicaciones Unificadas y la Telefonía IP.\\
 Un Conmutador IP o PBX IP conecta las extensiones internas dentro de una empresa y al mismo tiempo las conecta con la red pública conmutada, conocida también como PSTN (Public Switched Telephone Network), Proveedores VoIP y Troncales SIP, como se observa en la figura \ref{fig:ant00}.
 \subsection{\textbf{ Asterisk:}}
@@ -101,7 +118,7 @@ Uno de los puntos fuertes del software \textit{Asterisk} es que permite la unifi
 \textit{Asterisk} se empieza a adoptar en algunos entornos corporativos como una gran solución de bajo coste junto con SER (Sip Express Router).
 
 
-\subsection{\textbf{ FreePBX:}}  
+\subsection{\textbf{ FreePBX:}}
 \textit{FreePBX} es una GUI (interfaz gráfica de usuario) de código abierto basado en web que controla y dirige \textit{Asterisk}. \textit{FreePBX} está licenciado bajo la GNU General Public License y es un componente del FreePBX Distro (una distribución de GNU/Linux, basada en CentOS con el sistema PBX pre-instalado).
 \begin{figure}[h]
 	\centerline{\includegraphics[width=0.25\textwidth]{img/freepbx01.png}}
@@ -110,7 +127,7 @@ Uno de los puntos fuertes del software \textit{Asterisk} es que permite la unifi
 \end{figure}
 
 
-\section{Desarrollo del concepto}\label{sec:ddc}
+\section{Metodología}\label{sec:met}
 \begin{figure}[h]
 	\centerline{\includegraphics[width=0.3\textwidth]{img/diagrama01.png}}
 	\caption{Diagrama a implementar con FreePBX como servidor y dos clientes}
@@ -118,126 +135,117 @@ Uno de los puntos fuertes del software \textit{Asterisk} es que permite la unifi
 \end{figure}
 
 Para el desarrollo de nuestro proyecto, lo haremos de manera local por medio de una máquina virtual que hará de servidor y en cual se conectará dos clientes, un dispositivo móvil y una laptop, donde la laptop hará de cliente y de administrador ya que tendrá acceso a la interfaz gráfica de FreePBX para su administración. En los clientes los dispositivos harán de \textit{softphones}, con diferentes software para cada uno en el cual no entraremos en detalle dado que nos interesa la administración del servidor de nuestra central telefónica que le brindará servicio a esos dos clientes.
+Para la configuración de nuestra centralita telefónica, lo hemos divido en dos partes, la configuración de nuestro servidor y la configuración en los \textit{softphones} de cada cliente, que en este caso es de distinto tipo de dispositivo.
 
-\section{Putamadre}
-\subsection{Raspberry Pi 3}
-Es el modelo más antiguo de la tercera generación de Raspberry Pi. Reemplazó el Raspberry Pi 2 Model B en febrero de 2016. Desarrollado en el Reino Unido por la fundación \textbf{Raspberry Pi}, con el objetivo de estimular la enseñanza de informática en las escuelas. \\
-Salió a la luz en el año 2016, renueva procesador, una vez más de la compañía Broadcom, una vez más un Quad-Core, pero pasa de 900 MHz a 1.20 GHz. Mantiene la RAM de 1GB. Su novedad fue la inclusión de Wi-Fi y Bluetooth (4.1 Low Energy) sin necesidad de adaptadores.
+\subsection{Configuración Servidor}
 \begin{figure}[h]
-	%\centerline{\includegraphics[width=0.3\textwidth]{platform/rasp.jpg}}
-	\caption{Raspberry Pi3 Modelo B.}
-	\label{fig:ant01}
-\end{figure}
-Según Amazon, el precio está oscilando entre 50 y 70 dólares, dependiento del kit a comprar, donde incluyen módulos y memorias adicionales para su uso con la Raspberry.\\
-Las características principales se las puede observar en el cuadro \ref{tab:rb01}.
-\begin{table}[tbp]
-\begin{center}
-	\begin{tabular}{|p{2.5cm}|p{5.5cm}|}
-	\hline 
-	\textbf{Especificaciones} &\textbf{Raspberry Pi3 Modelo B} \\ \hline
-	CPU  &1.2GHz 64-bit quad-core ARMv8 \\\hline
-	Memoria (SDRAM) &1 GB compartidos con la GPU \\\hline
-	Puertos USB &4 \\\hline
-	Almacenamiento integrado &MicroSD \\\hline
-	Conectividad de red &10/100 Ethernet RJ-45 vía hub USB, Wifi 802.11n, Bluetooth 4.1 \\\hline
-	Fuente de alimentación &5 V vía micro USB o GPIO header \\\hline
-	Sistemas Operativos Soportados &GNU/Linux: Debian (Raspbian), Fedora (Pidora), Arch Linux (Arch Linux ARM), Slackware Linux, SUSE Linux Enterprise Server for ARM. RISC OS.\\\hline
-\end{tabular}\vspace{0.25cm}
-\caption{Características Raspeberry Pi 3 Modelo B}
-\label{tab:rb01}
-\end{center}
-\end{table}
+    \begin{subfigure}[h]{0.5\textwidth}
+       \centerline{\includegraphics[width=0.7\textwidth]{img/1.jpeg}}
+        \caption{Selección de versión de FreePBX}
 
-	\subsection{Arduino Uno R3}
-	El Arduino Uno R3 utiliza el microcontrolador ATmega328. En adición a todas las características de las tarjetas anteriores, el Arduino Uno utiliza el ATmega16U2 para el manejo de USB en lugar del 8U2 (o del FTDI encontrado en generaciones previas). Esto permite ratios de transferencia más rápidos y más memoria. No se necesitan drivers para Linux o Mac (el archivo inf para Windows es necesario y está incluido en el IDE de Arduino).\\
-	\textbf{Arduino} es una compañía open source y open hardware, así como un proyecto y comunidad internacional que diseña y manufactura placas de desarrollo de hardware para construir dispositivos digitales y dispositivos interactivos que puedan sensar y controlar objetos del mundo real. \\
-	El microcontrolador de la placa se programa usando el “Arduino Programming Language” (basado en Wiring) y el “Arduino Development Environment” (basado en Processing). Los proyectos de Arduino pueden ser autonomos o se pueden comunicar con software en ejecución en un ordenador (por ejemplo con Flash, Processing, MaxMSP, etc.).
-	\begin{figure}[h]
-	%\centerline{\includegraphics[width=0.25\textwidth]{platform/ardui}}
-	\caption{Arduino Uno R3.}
-	\label{fig:ardui}
-	\end{figure}
-	 El precio en Amazon oscila entre los 12 y 30 dólares, dependiendo del kit a comprar.\\
-	Las características principales están presentes en el cuadro \ref{tab:ardui01}.
-	\begin{table}[h]
-\begin{center}
-	\begin{tabular}{|p{2.5cm}|p{5.5cm}|}
-	\hline 
-	\textbf{Especificaciones} &\textbf{Arduino Uno R3} \\ \hline
-	Microcontrolador  &ATmega328 \\\hline
-	Voltaje de entrada &7 - 12 V \\\hline
-	Entradas digitales &14 pines digitales de I/0 (6 salidas PWM) \\\hline
-	Entradas analógicas & 6 entradas análogas \\\hline
-	Memoria Flash &32k\\\hline
-	Reloj &16MHz \\\hline
-	Sistemas Operativos Soportados &N/A.\\\hline
-\end{tabular}\vspace{0.25cm}
-\caption{Características Arduino Uno R3}
-\label{tab:ardui01}
-\end{center}
-\end{table}
-	\subsection{Beaglebone black}
-	Es una computadora barebone de desarrollo, la sucesora de la beaglebone lanzada en octubre de 2011. El precio está en 45 dólares y entre otras diferencias incrementa la RAM a 512 MB, el reloj de procesador a 1GHz, y añade HDMI y 2 GB de memoria flash eMMC. También se entrega con kernel Linux 3.8, permitiendo a la BeagleBone Black tener la ventaja del Gestor de Renderizado Directo (DRM).Demás especificaciones se observa en el cuadro \ref{tab:bb01}
-		\begin{table}[h]
-\begin{center}
-	\begin{tabular}{|p{2.5cm}|p{5.5cm}|}
-	\hline 
-	\textbf{Especificaciones} &\textbf{BeagleBone Black} \\ \hline
-	CPU  &Cortex-A8 + 2xPRU (200MHz) \\\hline
-	Frecuencia SoC &1000MHz \\\hline
-	DSP &DDR3 \\\hline
-	Memoria & 512 \\\hline
-	Memoria Flash &32k\\\hline
-	Reloj &16MHz \\\hline
-	Sistemas Operativos Soportados &Rowboat,Angstrom, Fedora, FreeBSD, MINIX 3, NetBSD, OpenBSD, openSUSE, QNX, RISC OS, Ubuntu, Void Linux, Windows Embedded.\\\hline
-\end{tabular}\vspace{0.25cm}
-\caption{Características BeagleBone Black}
-\label{tab:bb01}
-\end{center}
-\end{table}
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+     \begin{subfigure}[h]{0.5\textwidth}
+        \centerline{\includegraphics[width=0.7\textwidth]{img/2.jpeg}}
+        \caption{Instalación de la parte gráfica de FreePBX}
+
+    \end{subfigure}
+    \caption{\textit{Instalación del servidor FreePBX.}}
+\label{fig:mets0}
+\end{figure}
+En primer lugar se requiere el \texttt{.iso} del servidor FreePBX que utilizaremos. Se lo puede descargar desde el sitio de \href{https://www.freepbx.org/downloads/freepbx-distro/}{{\textbf{FreePBX}}}. Una vez descargado y montado en nuestra máquina virtual procedemos con la instalación del servidor. Seguimos los pasos como se muestra en la figura \ref{fig:mets0}.\\
+
+Una vez seleccionado las componentes a instalar, empezará la instalación donde pedirá la creación de un usuario y contraseña. Una vez terminado de instalar, arrancará el servidor indicando la configuración de red actual que posee para acceder de manera remota por medio de su interfaz gráfica.\\
+Ya en este punto, se puede acceder al servidor y configurar las extensiones para los clientes. En una centralita telefónica genera extensiones a los dispositivos clientes para que ellos, por medio de una autenticación de usuario, acceda a esa extensión del servidor y pueda comunicarse con cualquier extensión de la central. Esto lo realizamos accediendo a la interfaz gráfica desde cualquier navegador conectado en la misma red del servidor y poniendo la dirección ip del servidor. Para la configuración del servidor pedirá las credenciales que se crearon en la parte de la instalación previa.
+\begin{figure}
+	\centerline{\includegraphics[width=0.45\textwidth]{img/8.jpeg}}
+	\caption{\textit{Acceso al servidor FreePBX.}}
+	\label{fig:mets2}
+\end{figure}
+Agregamos las extensiones para dos dispositivos, la extensión 101 y 102. Para agregar una extensión utilizaremos el protocolo SIP para comunicación. Y añadiremos los datos para que el cliente pueda acceder a esa extensión.
+\begin{figure}
+	\centerline{\includegraphics[width=0.5\textwidth]{img/mets04.jpeg}}
+	\caption{\textit{Directorio de extensiones.}}
+	\label{fig:mets4}
+\end{figure}
+Una vez creado nuestro directorio de extensiones, tendremos que configurar nuestro \textit{softphones} para que accedan a ello.
+
+\subsection{Configuración Cliente}
 \begin{figure}[h]
-	%\centerline{\includegraphics[width=0.2\textwidth]{platform/bb.jpg}}
-	\caption{BeagleBone Black.}
-	\label{fig:ant01}
+    \begin{subfigure}[h]{0.35\textwidth}
+       \centerline{\includegraphics[width=0.7\textwidth]{img/metc01.jpeg}}
+        \caption{Inicio de sesión desde dispositivo móvil}
+
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+     \begin{subfigure}[h]{0.35\textwidth}
+        \centerline{\includegraphics[width=0.7\textwidth]{img/metc02.jpeg}}
+        \caption{Inicio de sesión desde la aplicación de escritorio.}
+
+    \end{subfigure}
+    \caption{\textit{Configuración de Zoiper.}}
+\label{fig:metc0}
 \end{figure}
-\subsection{pcDuino}
-	\textbf{pcDuino} es una mini computadora o plataforma de computadora de una sola placa que funciona con PC como el sistema operativo, como Ubuntu y Android ICS. Da salida a la pantalla a HDMI. Además, tiene una interfaz de encabezados de hardware compatible con Arduino (TM). pcDuino puede usarse para enseñar Python, C y más cosas interesantes.\\
-	\begin{figure}[h]
-	%\centerline{\includegraphics[width=0.2\textwidth]{platform/pcd.png}}
-	\caption{pcDuino1.}
-	\label{fig:ant01}
+El \textit{softphone} a utilizar para elaborar la comunicación VoIP es \href{https://www.zoiper.com/}{{\textbf{Zoiper}}}, que es gratuito y multiplataforma. Utilizaremos en un dispositivo móvil y en una laptop. Lo que se realiza es acceder al servidor FreePBX con la extensión como username y la contraseña de la misma extensión configurada en el servidor; de esta manera, en el dispositivo se habilita dicha extensión para la comunicación. Toda esta configuración se observa en la figura \ref{fig:metc0}.\\ Ya realizado esto, se puede realizar llamadas entre extensiones desde cualquier \textit{softphone}. Se puede observar, además, que los dispositivos están configurados con el servidor FreePBX.
+\begin{figure}[h]
+    \begin{subfigure}[h]{0.35\textwidth}
+       \centerline{\includegraphics[width=0.7\textwidth]{img/metc03.jpeg}}
+        \caption{Zoiper configurado en dispositivo móvil}
+
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+     \begin{subfigure}[h]{0.35\textwidth}
+        \centerline{\includegraphics[width=0.7\textwidth]{img/metc04.jpeg}}
+        \caption{Zoiper configurado en la aplicación de escritorio.}
+
+    \end{subfigure}
+    \caption{\textit{Dispositivos con Zoiper.}}
+\label{fig:metc0}
 \end{figure}
-	\textit{pcDuino1} es una plataforma de mini PC rentable y de alto rendimiento que ejecuta PC como SO, como Ubuntu y Android ICS. Envía su pantalla a un televisor o monitor habilitado con HDMI a través de la interfaz HDMI incorporada. Está especialmente dirigido a las crecientes demandas de la comunidad de código abierto. La plataforma podría funcionar como un sistema operativo tipo PC completo con una cadena de herramientas fácil de usar y compatible con el popular ecosistema Arduino, como Arduino Shields (puede que necesite un puente protector) y proyectos de código abierto, etc. Las características principales se las observa en el cuadro \ref{tab:pcd01}.\\
-			\begin{table}[h]
-\begin{center}
-	\begin{tabular}{|p{2.5cm}|p{5.5cm}|}
-	\hline 
-	\textbf{Especificaciones} &\textbf{pcDuino1} \\ \hline
-	CPU  &1GHz ARM Cortex A8\\\hline
-	DRAM &1 GB \\\hline
-	Almacenamiento OnBoard &2GB Flash, microSD card slot hasta 32 GB \\\hline
-	Interfaz de Red & 10/100Mbps RJ45 y USB Wifi extensión\\\hline
-	Alimentación &5V, 2A\\\hline
-	Sistemas Operativos Soportados &Linux3.0 + Ubuntu 12.04Android ICS 4.0\\\hline
-\end{tabular}\vspace{0.25cm}
-\caption{Características pcDuino1}
-\label{tab:pcd01}
-\end{center}
-\end{table}
-\section{Comparación de Plataformas}
-Cada uno de estas mini computadoras tienen su correcto desarrollo dependiendo del aplicativo en el que le estén usando, es decir su uso dependerá de la función que lo pongas a realizar. La de menor escalabilidad podríamos mencionar a Arduino, ya que en primer lugar es un microcontrolador, y hay cosas en las que se queda corto, pero es ideal para llevar control de todo tipo de sensores y actadores y por su precio más todavía. Los restantes dependerá del sistema operativo a usarse, y los GPIOS que requeramos usar, si queremos un sistema operativo en tiempo real, la tasa de datos que queramos procesar, todas esas consideraciones hay que tener en cuenta al momento de escoger que plataforma utilizar.
+
+
+\section{Resultados}
+\begin{figure}[H]
+    \begin{subfigure}[h]{0.5\textwidth}
+       \centerline{\includegraphics[width=0.7\textwidth]{img/metc05.jpeg}}
+        \caption{Llamada desde la extensión 101 a la extensión 102.}
+
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+     \begin{subfigure}[h]{0.5\textwidth}
+        \centerline{\includegraphics[width=0.7\textwidth]{img/metc06.jpeg}}
+        \caption{Llamada recibida desde la extensión 101.}
+
+    \end{subfigure}
+    \caption{\textit{Llamadas entre extensiones.}}
+\label{fig:metc3}
+\end{figure}
+
+\section{Análisis de Resultados}
+La configuración del servidor y de los clientes fueron realizados con éxito, y se logró la comunicación sobre VoIP con software \textit{open source}. Hay que aclarar que la seguridad depende en su parte en el \textit{softphone}, por ejemplo en nuestro caso Zoiper encripta las comunicaciones lo que presenta mayor seguridad en nuestra centralita. A parte de las autenticaciones que se realizan desde el servidor con los clientes que acceden al directorio de extensiones. La demostración que realizamos es una llamada desde la extensión 101 hacia la extensión 102, y se observa en la figura \ref{fig:metc3} como la extensión recibe la llamada desde la extensión 101.
+
+
 \section{Conclusiones}
 \begin{itemize}
-	\item Las plataformas de prototipado permite elaborar a bajo costo operaciones de hardware por medio de periféricos de manera más sencilla.
-	\item La utilización de las plataformas dependerá de la función que quiera realizar.
+	\item La transmisión de voz sobre IP puede facilitar el proceso de incrementar las líneas telefónicas en la empresa sin la necesidad de líneas físicas adicionales.
+	\item El uso de este tipo de software incluye funcionalidades que normalmente son facturadas con cargo extra por las compañías de teléfonos, tales como transferencia de llamadas, identificación de la persona que llama o remarcado automático, son fáciles de implementar con la tecnología de voz sobre IP.
+  \item FreePBX surge como un panel web de código abierto para Asterisk, facilitando la configuración de funciones de Asterisk de forma gráfica sin necesidad de requerir conocimientos elevados de programación.
 \end{itemize}
- 
+
+\section{Recomendaciones}
+\begin{itemize}
+	\item Prestar mucha atención a las credenciales de los usuarios dado que son necesarias para la configuración en otros dispositivos, el ingreso incorrecto de las mismas puede ocasionar caídas en el servidor.
+	\item Asegurarse de que las extensiones creadas usen los protocolos disponibles en los softphones para evitar conflictos en el registro de cuentas.
+  \item Verificar que los dispositivos a registrar se encuentren todos dentro de la misma red local.
+\end{itemize}
+
+
 \begin{thebibliography}{00}
-\bibitem{b1}  Liz upton, ``Introducing the New Out Of Box Software (NOOBS)'' , Raspberry Pi, 2013.
-\bibitem{b2} Shead, Sam, ``Raspberry Pi delivery delays leave buyers hungry (and angry)", ZDNet, Octubre 2012.
-\bibitem{b3} GSyC, ``Simple Network Managment Protocol,''  Universidad Rey Juan Carlos, 2013.
-\bibitem{b4} LinkSprite, ``pcDuino1 Overview ,''  admin.
-\bibitem{b5} ``OMAP3530 BeagleBoard" High perfomance and numerous expansion options; page 3, Dkc1.digikey.com , Mayo 2009.
+\bibitem{b1}  Google Talkabout, ``XMPP Federation'' , 2006.
+\bibitem{b2} Shead, Sam, ``Android SIP Client", ZDNet, Octubre 2012.
+\bibitem{b3} Michael Dosch, Steve Church, ``VoIP in the Broadcast Studio''  Axia Audio, 2011.
+\bibitem{b4} A.H. Muhammad Amin, ``VoIP performance measurement using QoS parameters,''  2016.
+\bibitem{b5} Madsen, Leif, Jim Van Meggelen; ``Asterisk: The Definitive Guide, 4th Edition", O'Reily Media, 2013.
 \end{thebibliography}
 
 \end{document}
